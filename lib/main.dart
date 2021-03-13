@@ -8,10 +8,10 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter/material.dart';
 
 void main() {
-  runApp(MyApp());
+  runApp(CtrlFanApplication());
 }
 
-class MyApp extends StatelessWidget {
+class CtrlFanApplication extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final textTheme = Theme.of(context).textTheme;
