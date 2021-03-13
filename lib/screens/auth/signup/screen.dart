@@ -106,7 +106,9 @@ Widget _entryField(String title, {bool isPassword = false}) {
             decoration: InputDecoration(
                 border: InputBorder.none,
                 fillColor: Color(0xfff3f3f4),
-                filled: true))
+                filled: true
+            )
+        )
       ],
     ),
   );
@@ -129,7 +131,9 @@ Widget _submitButton(BuildContext context) {
         gradient: LinearGradient(
             begin: Alignment.centerLeft,
             end: Alignment.centerRight,
-            colors: [Color(0xfffbb448), Color(0xfff7892b)])),
+            colors: [Color(0xfffbb448), Color(0xfff7892b)]
+        )
+    ),
     child: Text(
       'Register Now',
       style: TextStyle(fontSize: 20, color: Colors.white),
@@ -142,8 +146,8 @@ Widget _loginAccountLabel(BuildContext context) {
     onTap: () {
       Navigator.pushReplacement(
           context,
-          MaterialPageRoute(builder: (context) => LoginScreen()
-          ));
+          MaterialPageRoute(builder: (context) => LoginScreen())
+      );
     },
     child: Container(
       padding: EdgeInsets.all(15),
@@ -163,7 +167,8 @@ Widget _loginAccountLabel(BuildContext context) {
             style: TextStyle(
                 color: Color(0xfff79c4f),
                 fontSize: 13,
-                fontWeight: FontWeight.w600),
+                fontWeight: FontWeight.w600
+            ),
           ),
         ],
       ),
