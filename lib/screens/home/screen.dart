@@ -1,8 +1,10 @@
 // native
-import 'package:ctrl_fan_project/screens/watch/screen.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/foundation.dart';
+
+// application
+import 'package:ctrl_fan_project/screens/watch/screen.dart';
 
 class HomeScreen extends StatefulWidget {
   HomeScreen({Key key}) : super(key: key);
