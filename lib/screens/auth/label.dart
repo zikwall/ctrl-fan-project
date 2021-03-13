@@ -36,6 +36,7 @@ Widget CtrlFanProjectLabel(BuildContext context, bool invert) {
             text: 'ct',
             style: TextStyle(color: Colors.black, fontSize: 30),
           ),
-        ]),
+        ]
+    ),
   );
 }
