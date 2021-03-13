@@ -1,5 +1,6 @@
 // native
 import 'package:ctrl_fan_project/help/platform.dart';
+import 'package:ctrl_fan_project/screens/auth/forgot/screen.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/material.dart';
 
@@ -196,7 +197,7 @@ Widget _forgotPasswordLabel(BuildContext context) {
   return InkWell(
     onTap: () {
       Navigator.pushReplacement(
-          context, MaterialPageRoute(builder: (context) => SignUpScreen()
+          context, MaterialPageRoute(builder: (context) => ForgotScreen()
       ));
     },
     child: Container(

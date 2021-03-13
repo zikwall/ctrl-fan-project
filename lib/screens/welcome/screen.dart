@@ -71,11 +71,11 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
                   SizedBox(
-                    height: 65,
+                    height: 32,
                   ),
                   CtrlFanProjectLabel(context, false),
                   SizedBox(
-                    height: 80,
+                    height: 100,
                   ),
                   _submitButton(context),
                   SizedBox(
@@ -83,13 +83,16 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                   ),
                   _signUpButton(context),
                   SizedBox(
-                    height: 20,
-                  ),
-                  _forgotButton(context),
-                  SizedBox(
                     height: 10,
                   ),
-                  _addDeviceButton(context),
+                  _rightAlignLabel('Forgot password?', () {
+                    Navigator.push(
+                        context, MaterialPageRoute(builder: (context) => ForgotScreen()
+                    ));
+                  }),
+                  _rightAlignLabel('Add new device', () {
+                    // todo add device screen
+                  })
                 ],
               ),
             ),
@@ -213,46 +216,20 @@ Widget _signUpButton(BuildContext context) {
   );
 }
 
-Widget _forgotButton(BuildContext context) {
+Widget _rightAlignLabel(String label, Function onTab) {
   return InkWell(
     onTap: () {
-      Navigator.push(
-          context, MaterialPageRoute(builder: (context) => ForgotScreen()
-      ));
+      onTab();
     },
     child: Container(
-      width: MediaQuery.of(context).size.width,
-      padding: EdgeInsets.symmetric(vertical: 13),
-      alignment: Alignment.center,
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.all(Radius.circular(5)),
-        border: Border.all(color: Colors.black, width: 2),
-      ),
-      child: Text(
-        'Forgot password',
-        style: TextStyle(fontSize: 20, color: Colors.black),
-      ),
-    ),
-  );
-}
-
-Widget _addDeviceButton(BuildContext context) {
-  return InkWell(
-    onTap: () {
-
-    },
-    child: Container(
-      width: MediaQuery.of(context).size.width,
-      padding: EdgeInsets.symmetric(vertical: 13),
-      alignment: Alignment.center,
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.all(Radius.circular(5)),
-        border: Border.all(color: Colors.black, width: 2),
-        color: Colors.white,
-      ),
-      child: Text(
-        'Add device',
-        style: TextStyle(fontSize: 20, color: Colors.black),
+      padding: EdgeInsets.symmetric(vertical: 10),
+      alignment: Alignment.centerRight,
+      child: Text(label,
+          style: TextStyle(
+            fontSize: 14,
+            fontWeight: FontWeight.w500,
+            color: Colors.white,
+          )
       ),
     ),
   );
