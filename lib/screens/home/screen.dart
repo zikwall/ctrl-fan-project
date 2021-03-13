@@ -1,4 +1,5 @@
 // native
+import 'package:ctrl_fan_project/screens/watch/screen.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/foundation.dart';
@@ -37,7 +38,14 @@ class _HomeScreenState extends State<HomeScreen> {
                 top: statusBarHeight,
               ),
               child: Center(
-                child: Text("Home"),
+                child: InkWell(
+                  onTap: () {
+                    Navigator.push(
+                        context, MaterialPageRoute(builder: (context) => WatchScreen()
+                    ));
+                  },
+                  child: Text("Watch"),
+                ),
               ),
             )
         )
