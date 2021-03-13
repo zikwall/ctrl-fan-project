@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:io' show Platform;
 import 'package:flutter/services.dart';
 import 'package:flutter/foundation.dart' as Foundation;
+import 'package:device_info/device_info.dart';
 
 const bool isProd = Foundation.kReleaseMode;
 
@@ -29,5 +30,38 @@ class PlatformHelper {
     }
 
     return status;
+  }
+
+  static Future<DeviceInformation> getInfo() async {
+    DeviceInfoPlugin deviceInfoPlugin = DeviceInfoPlugin();
+
+    if (Platform.isAndroid) {
+      AndroidDeviceInfo info = await deviceInfoPlugin.androidInfo;
+
+      return new DeviceInformation(
+        info.androidId,
+        info.model,
+        info.device,
+        info.version.release,
+      );
+    }
+
+    IosDeviceInfo info = await deviceInfoPlugin.iosInfo;
+
+    return DeviceInformation(info.identifierForVendor, '', info.model, '');
+  }
+}
+
+class DeviceInformation {
+  String DeviceId;
+  String Release;
+  String model;
+  String device;
+
+  DeviceInformation(String deviceid, model, device, release) {
+    this.DeviceId = deviceid;
+    this.Release = release;
+    this.model = model;
+    this.device = device;
   }
 }
