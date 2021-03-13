@@ -1,4 +1,5 @@
 // native
+import 'package:ctrl_fan_project/help/platform.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/foundation.dart';
@@ -14,9 +15,19 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  bool installedFromMarket = false;
+
   @override
   void initState() {
     super.initState();
+    check();
+  }
+
+  void check() async {
+    bool state = await PlatformHelper.isInstalledFromMarket();
+    setState(() {
+      installedFromMarket = state;
+    });
   }
 
   @override
@@ -46,7 +57,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         context, MaterialPageRoute(builder: (context) => WatchScreen()
                     ));
                   },
-                  child: Text("Watch"),
+                  child: Text("Watch, ${installedFromMarket ? " original" : "crack"}"),
                 ),
               ),
             )
