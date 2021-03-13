@@ -1,5 +1,5 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.ctrl_fan_project">
+    package="com.illumination_team.ctrl_fan_project">
    <application
         android:label="ctrl_fan_project"
         android:usesCleartextTraffic="true"
