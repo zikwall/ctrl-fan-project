@@ -8,9 +8,7 @@ import 'package:ctrl_fan_project/screens/auth/container.dart';
 import 'package:ctrl_fan_project/screens/auth/label.dart';
 
 class SignUpScreen extends StatefulWidget {
-  SignUpScreen({Key key, this.title}) : super(key: key);
-
-  final String title;
+  SignUpScreen({Key key}) : super(key: key);
 
   @override
   _SignUpScreenState createState() => _SignUpScreenState();

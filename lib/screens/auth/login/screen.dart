@@ -11,9 +11,7 @@ import 'package:ctrl_fan_project/screens/auth/label.dart';
 import 'package:ctrl_fan_project/screens/home/screen.dart';
 
 class LoginScreen extends StatefulWidget {
-  LoginScreen({Key key, this.title}) : super(key: key);
-
-  final String title;
+  LoginScreen({Key key}) : super(key: key);
 
   @override
   _LoginScreenState createState() => _LoginScreenState();

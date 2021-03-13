@@ -9,9 +9,7 @@ import 'package:ctrl_fan_project/screens/auth/label.dart';
 import 'package:ctrl_fan_project/screens/welcome/screen.dart';
 
 class ForgotScreen extends StatefulWidget {
-  ForgotScreen({Key key, this.title}) : super(key: key);
-
-  final String title;
+  ForgotScreen({Key key}) : super(key: key);
 
   @override
   _ForgotScreenState createState() => _ForgotScreenState();
