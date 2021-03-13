@@ -7,7 +7,7 @@ import 'package:flutter/foundation.dart';
 import 'package:better_player/better_player.dart';
 
 // application
-import 'package:ctrl_fan_project/constants/dev.dart';
+import 'package:ctrl_fan_project/constants/hls.dev.dart';
 
 void main() {
   runApp(MyApp());
