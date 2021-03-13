@@ -17,6 +17,8 @@ class WatchScreen extends StatefulWidget {
 }
 
 class _WatchScreenState extends State<WatchScreen> {
+  GlobalKey _betterPlayerKey = GlobalKey();
+
   BetterPlayerDataSource dataSource = BetterPlayerDataSource(
     BetterPlayerDataSourceType.network,
     exampleHls,
@@ -75,6 +77,16 @@ class _WatchScreenState extends State<WatchScreen> {
                     aspectRatio: 16 / 9,
                     child: BetterPlayer(
                       controller: _betterPlayerController,
+                      key: _betterPlayerKey,
+                    ),
+                  ),
+                  Padding(
+                    padding: EdgeInsets.all(15),
+                    child: InkWell(
+                      onTap: () {
+                        _betterPlayerController.enablePictureInPicture(_betterPlayerKey);
+                      },
+                      child: Text("Enter to PIP"),
                     ),
                   )
                 ],
