@@ -95,7 +95,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
         ));
       },
       child: Container(
-        margin: EdgeInsets.symmetric(vertical: 20),
         padding: EdgeInsets.all(15),
         alignment: Alignment.bottomCenter,
         child: Row(
@@ -161,7 +160,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       height: 20,
                     ),
                     _submitButton(),
-                    SizedBox(height: height * .08),
+                    SizedBox(height: height * .11),
                     _loginAccountLabel(),
                   ],
                 ),

@@ -110,7 +110,6 @@ class _ForgotScreenState extends State<ForgotScreen> {
         ));
       },
       child: Container(
-        margin: EdgeInsets.symmetric(vertical: 20),
         padding: EdgeInsets.all(15),
         alignment: Alignment.bottomCenter,
         child: Row(
@@ -171,7 +170,7 @@ class _ForgotScreenState extends State<ForgotScreen> {
                       _emailPasswordWidget(),
                       SizedBox(height: 20),
                       _submitButton(),
-                      SizedBox(height: height * .33),
+                      SizedBox(height: height * .36),
                       _createAccountLabel(),
                     ],
                   ),
