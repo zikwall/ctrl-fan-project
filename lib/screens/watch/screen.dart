@@ -42,8 +42,10 @@ class _WatchScreenState extends State<WatchScreen> {
   void initState() {
     super.initState();
 
-    _betterPlayerController = BetterPlayerController(betterPlayerConfiguration,
-        betterPlayerDataSource: dataSource);
+    _betterPlayerController = BetterPlayerController(
+        betterPlayerConfiguration,
+        betterPlayerDataSource: dataSource
+    );
   }
 
   @override
