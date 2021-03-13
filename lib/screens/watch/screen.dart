@@ -68,33 +68,36 @@ class _WatchScreenState extends State<WatchScreen> {
     return AnnotatedRegion<SystemUiOverlayStyle>(
         value: SystemUiOverlayStyle(
           statusBarColor: Colors.transparent,
-          systemNavigationBarIconBrightness: Brightness.dark,
-          statusBarIconBrightness: Brightness.dark,
+          systemNavigationBarIconBrightness: Brightness.light,
+          statusBarIconBrightness: Brightness.light,
         ),
         child: Scaffold(
-            body: Padding(
-              padding: EdgeInsets.only(
-                top: statusBarHeight,
-              ),
-              child: Column(
-                children: <Widget>[
-                  AspectRatio(
-                    aspectRatio: 16 / 9,
-                    child: BetterPlayer(
-                      controller: _betterPlayerController,
-                      key: _betterPlayerKey,
+            body: Container(
+              color: Color(0xff0d1117),
+              child: Padding(
+                padding: EdgeInsets.only(
+                  top: statusBarHeight,
+                ),
+                child: Column(
+                  children: <Widget>[
+                    AspectRatio(
+                      aspectRatio: 16 / 9,
+                      child: BetterPlayer(
+                        controller: _betterPlayerController,
+                        key: _betterPlayerKey,
+                      ),
                     ),
-                  ),
-                  Padding(
-                    padding: EdgeInsets.all(15),
-                    child: InkWell(
-                      onTap: () {
-                        _betterPlayerController.enablePictureInPicture(_betterPlayerKey);
-                      },
-                      child: Text("Enter to PIP"),
-                    ),
-                  )
-                ],
+                    Padding(
+                      padding: EdgeInsets.all(15),
+                      child: InkWell(
+                        onTap: () {
+                          _betterPlayerController.enablePictureInPicture(_betterPlayerKey);
+                        },
+                        child: Text("Enter to PIP", style: TextStyle(color: Color(0xfff7892b))),
+                      ),
+                    )
+                  ],
+                ),
               ),
             )
         )
