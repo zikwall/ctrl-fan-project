@@ -1,5 +1,6 @@
 // native
 import 'dart:async';
+import 'package:flutter/services.dart';
 import 'package:flutter/material.dart';
 
 // application
@@ -38,109 +39,123 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
       return _splash(context);
     }
 
-    return Scaffold(
-      body: SingleChildScrollView(
-        child: Container(
-          padding: EdgeInsets.symmetric(horizontal: 20),
-          height: MediaQuery.of(context).size.height,
-          decoration: BoxDecoration(
-              borderRadius: BorderRadius.all(Radius.circular(5)),
-              boxShadow: <BoxShadow>[
-                BoxShadow(
-                    color: Colors.grey.shade200,
-                    offset: Offset(2, 4),
-                    blurRadius: 5,
-                    spreadRadius: 2
-                )
-              ],
-              gradient: LinearGradient(
-                  begin: Alignment.topCenter,
-                  end: Alignment.bottomCenter,
-                  colors: [Color(0xfffbb448), Color(0xffe46b10)]
-              )
-          ),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget>[
-              SizedBox(
-                height: 65,
-              ),
-              CtrlFanProjectLabel(context, false),
-              SizedBox(
-                height: 80,
-              ),
-              _submitButton(context),
-              SizedBox(
-                height: 20,
-              ),
-              _signUpButton(context),
-              SizedBox(
-                height: 20,
-              ),
-              _forgotButton(context),
-              SizedBox(
-                height: 10,
-              ),
-              _addDeviceButton(context),
-            ],
-          ),
+    return AnnotatedRegion<SystemUiOverlayStyle>(
+        value: SystemUiOverlayStyle(
+          statusBarColor: Colors.transparent,
+          systemNavigationBarIconBrightness: Brightness.dark,
+          statusBarIconBrightness: Brightness.dark,
         ),
-      ),
+        child: Scaffold(
+          body: SingleChildScrollView(
+            child: Container(
+              padding: EdgeInsets.symmetric(horizontal: 20),
+              height: MediaQuery.of(context).size.height,
+              decoration: BoxDecoration(
+                  borderRadius: BorderRadius.all(Radius.circular(5)),
+                  boxShadow: <BoxShadow>[
+                    BoxShadow(
+                        color: Colors.grey.shade200,
+                        offset: Offset(2, 4),
+                        blurRadius: 5,
+                        spreadRadius: 2
+                    )
+                  ],
+                  gradient: LinearGradient(
+                      begin: Alignment.topCenter,
+                      end: Alignment.bottomCenter,
+                      colors: [Color(0xfffbb448), Color(0xffe46b10)]
+                  )
+              ),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+                  SizedBox(
+                    height: 65,
+                  ),
+                  CtrlFanProjectLabel(context, false),
+                  SizedBox(
+                    height: 80,
+                  ),
+                  _submitButton(context),
+                  SizedBox(
+                    height: 20,
+                  ),
+                  _signUpButton(context),
+                  SizedBox(
+                    height: 20,
+                  ),
+                  _forgotButton(context),
+                  SizedBox(
+                    height: 10,
+                  ),
+                  _addDeviceButton(context),
+                ],
+              ),
+            ),
+          ),
+        )
     );
   }
 }
 
 Widget _splash(BuildContext context) {
-  return Scaffold(
-    body: SingleChildScrollView(
-      child: Container(
-        padding: EdgeInsets.symmetric(horizontal: 20),
-        height: MediaQuery.of(context).size.height,
-        width: MediaQuery.of(context).size.width,
-        decoration: BoxDecoration(
-            borderRadius: BorderRadius.all(Radius.circular(5)),
-            boxShadow: <BoxShadow>[
-              BoxShadow(
-                  color: Colors.grey.shade200,
-                  offset: Offset(2, 4),
-                  blurRadius: 5,
-                  spreadRadius: 2
-              )
-            ],
-            gradient: LinearGradient(
-                begin: Alignment.topCenter,
-                end: Alignment.bottomCenter,
-                colors: [Color(0xfffbb448), Color(0xffe46b10)]
-            )
-        ),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            const Spacer(),
-            Center(
-              child: CtrlFanProjectLabel(context, false),
-            ),
-            const Spacer(),
-            new CircularProgressIndicator(
-              backgroundColor: Colors.white,
-              valueColor: new AlwaysStoppedAnimation<Color>(Color(0xfffbb448)),
-            ),
-            SizedBox(
-              height: 10,
-            ),
-            new Text("Loading...", style: TextStyle(
-              fontStyle: Theme.of(context).textTheme.display1.fontStyle,
-              fontSize: 12,
-              fontWeight: FontWeight.w300,
-              color: Colors.white,
-            )),
-            const Spacer(),
-          ],
-        ),
+  return AnnotatedRegion<SystemUiOverlayStyle>(
+      value: SystemUiOverlayStyle(
+        statusBarColor: Colors.transparent,
+        systemNavigationBarIconBrightness: Brightness.dark,
+        statusBarIconBrightness: Brightness.dark,
       ),
-    ),
+      child: Scaffold(
+        body: SingleChildScrollView(
+          child: Container(
+            padding: EdgeInsets.symmetric(horizontal: 20),
+            height: MediaQuery.of(context).size.height,
+            width: MediaQuery.of(context).size.width,
+            decoration: BoxDecoration(
+                borderRadius: BorderRadius.all(Radius.circular(5)),
+                boxShadow: <BoxShadow>[
+                  BoxShadow(
+                      color: Colors.grey.shade200,
+                      offset: Offset(2, 4),
+                      blurRadius: 5,
+                      spreadRadius: 2
+                  )
+                ],
+                gradient: LinearGradient(
+                    begin: Alignment.topCenter,
+                    end: Alignment.bottomCenter,
+                    colors: [Color(0xfffbb448), Color(0xffe46b10)]
+                )
+            ),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                const Spacer(),
+                Center(
+                  child: CtrlFanProjectLabel(context, false),
+                ),
+                const Spacer(),
+                new CircularProgressIndicator(
+                  backgroundColor: Colors.white,
+                  valueColor: new AlwaysStoppedAnimation<Color>(Color(0xfffbb448)),
+                ),
+                SizedBox(
+                  height: 10,
+                ),
+                new Text("Loading...", style: TextStyle(
+                  fontStyle: Theme.of(context).textTheme.display1.fontStyle,
+                  fontSize: 12,
+                  fontWeight: FontWeight.w300,
+                  color: Colors.white,
+                )),
+                const Spacer(),
+              ],
+            ),
+          ),
+        ),
+      )
   );
 }
 
