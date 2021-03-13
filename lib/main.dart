@@ -1,11 +1,11 @@
 // native
-import 'package:ctrl_fan_project/screens/welcome/screen.dart';
+import 'package:flutter/material.dart';
 
 // dependencies
 import 'package:google_fonts/google_fonts.dart';
 
 // application
-import 'package:flutter/material.dart';
+import 'package:ctrl_fan_project/screens/welcome/screen.dart';
 
 void main() {
   runApp(CtrlFanApplication());
