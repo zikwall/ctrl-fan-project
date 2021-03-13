@@ -10,9 +10,7 @@ import 'package:ctrl_fan_project/screens/auth/signup/screen.dart';
 import 'package:ctrl_fan_project/screens/auth/forgot/screen.dart';
 
 class WelcomeScreen extends StatefulWidget {
-  WelcomeScreen({Key key, this.title}) : super(key: key);
-
-  final String title;
+  WelcomeScreen({Key key}) : super(key: key);
 
   @override
   _WelcomeScreenState createState() => _WelcomeScreenState();
