@@ -5,6 +5,7 @@ import 'package:flutter/foundation.dart';
 
 // dependencies
 import 'package:better_player/better_player.dart';
+import 'package:wakelock/wakelock.dart';
 
 // application
 import 'package:ctrl_fan_project/constants/hls.dev.dart';
@@ -36,6 +37,7 @@ class _WatchScreenState extends State<WatchScreen> {
     autoPlay: true,
     looping: true,
     fullScreenByDefault: false,
+    allowedScreenSleep: false,
   );
 
   BetterPlayerController _betterPlayerController;
@@ -48,11 +50,15 @@ class _WatchScreenState extends State<WatchScreen> {
         betterPlayerConfiguration,
         betterPlayerDataSource: dataSource
     );
+
+    Wakelock.enable();
   }
 
   @override
   void dispose() {
     _betterPlayerController.dispose();
+    Wakelock.disable();
+
     super.dispose();
   }
 
