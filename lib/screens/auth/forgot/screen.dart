@@ -1,5 +1,7 @@
 // native
+import 'package:flutter/services.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/foundation.dart';
 
 // application
 import 'package:ctrl_fan_project/screens/auth/signup/screen.dart';
@@ -147,39 +149,47 @@ class _ForgotScreenState extends State<ForgotScreen> {
   @override
   Widget build(BuildContext context) {
     final height = MediaQuery.of(context).size.height;
-    return Scaffold(
-        body: Container(
-          height: height,
-          child: Stack(
-            children: <Widget>[
-              Positioned(
-                  top: -height * .15,
-                  right: -MediaQuery.of(context).size.width * .4,
-                  child: BezierContainer()
-              ),
-              Container(
-                padding: EdgeInsets.symmetric(horizontal: 20),
-                child: SingleChildScrollView(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: <Widget>[
-                      SizedBox(height: height * .2),
-                      CtrlFanProjectLabel(context, true),
-                      SizedBox(height: 50),
-                      _emailPasswordWidget(),
-                      SizedBox(height: 20),
-                      _submitButton(),
-                      SizedBox(height: height * .36),
-                      _createAccountLabel(),
-                    ],
+
+    return AnnotatedRegion<SystemUiOverlayStyle>(
+      value: SystemUiOverlayStyle(
+        statusBarColor: Colors.transparent,
+        systemNavigationBarIconBrightness: Brightness.dark,
+        statusBarIconBrightness: Brightness.dark,
+      ),
+      child: Scaffold(
+          body: Container(
+            height: height,
+            child: Stack(
+              children: <Widget>[
+                Positioned(
+                    top: -height * .15,
+                    right: -MediaQuery.of(context).size.width * .4,
+                    child: BezierContainer()
+                ),
+                Container(
+                  padding: EdgeInsets.symmetric(horizontal: 20),
+                  child: SingleChildScrollView(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: <Widget>[
+                        SizedBox(height: height * .2),
+                        CtrlFanProjectLabel(context, true),
+                        SizedBox(height: 50),
+                        _emailPasswordWidget(),
+                        SizedBox(height: 20),
+                        _submitButton(),
+                        SizedBox(height: height * .36),
+                        _createAccountLabel(),
+                      ],
+                    ),
                   ),
                 ),
-              ),
-              Positioned(top: 40, left: 0, child: _backButton()),
-            ],
-          ),
-        )
+                Positioned(top: 40, left: 0, child: _backButton()),
+              ],
+            ),
+          )
+      )
     );
   }
 }
