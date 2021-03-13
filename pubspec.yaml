@@ -23,6 +23,7 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  better_player: ^0.0.62
 
 
   # The following adds the Cupertino Icons font to your application.

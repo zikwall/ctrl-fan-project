@@ -2,6 +2,7 @@
     package="com.example.ctrl_fan_project">
    <application
         android:label="ctrl_fan_project"
+        android:usesCleartextTraffic="true"
         android:icon="@mipmap/ic_launcher">
         <activity
             android:name=".MainActivity"
