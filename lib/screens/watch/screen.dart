@@ -1,4 +1,5 @@
 // native
+
 import 'package:flutter/services.dart';
 import 'package:flutter/material.dart';
 
@@ -8,9 +9,15 @@ import 'package:wakelock/wakelock.dart';
 
 // application
 import 'package:ctrl_fan_project/constants/hls.dev.dart';
+import 'package:ctrl_fan_project/help/string.dart';
 
 class WatchScreen extends StatefulWidget {
-  WatchScreen({Key key}) : super(key: key);
+  final Map<String, dynamic> channel;
+
+  WatchScreen({
+    Key key,
+    @required this.channel
+  }) : super(key: key);
 
   @override
   _WatchScreenState createState() => _WatchScreenState();
@@ -18,19 +25,6 @@ class WatchScreen extends StatefulWidget {
 
 class _WatchScreenState extends State<WatchScreen> {
   GlobalKey _betterPlayerKey = GlobalKey();
-
-  BetterPlayerDataSource dataSource = BetterPlayerDataSource(
-    BetterPlayerDataSourceType.network,
-    exampleHls,
-    liveStream: true,
-    notificationConfiguration: BetterPlayerNotificationConfiguration(
-      showNotification: true,
-      title: "Elephant dream",
-      author: "Some author",
-      imageUrl:
-          "https://upload.wikimedia.org/wikipedia/commons/thumb/3/37/African_Bush_Elephant.jpg/1200px-African_Bush_Elephant.jpg",
-    ),
-  );
 
   var betterPlayerConfiguration = BetterPlayerConfiguration(
     autoPlay: true,
@@ -44,6 +38,19 @@ class _WatchScreenState extends State<WatchScreen> {
   @override
   void initState() {
     super.initState();
+
+    BetterPlayerDataSource dataSource = BetterPlayerDataSource(
+      BetterPlayerDataSourceType.network,
+      base64decode(widget.channel['stream_link'].toString().substring(3)),
+      liveStream: true,
+      notificationConfiguration: BetterPlayerNotificationConfiguration(
+        showNotification: true,
+        title: "Elephant dream",
+        author: "Some author",
+        imageUrl:
+        "https://upload.wikimedia.org/wikipedia/commons/thumb/3/37/African_Bush_Elephant.jpg/1200px-African_Bush_Elephant.jpg",
+      ),
+    );
 
     _betterPlayerController = BetterPlayerController(
         betterPlayerConfiguration,

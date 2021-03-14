@@ -54,33 +54,12 @@ class _HomeScreenState extends State<HomeScreen> {
       future: futureStreams,
       builder: (BuildContext context, AsyncSnapshot<Streams> snapshot) {
         if (snapshot.hasData) {
-          return AnimationLimiter(
-            child: ListView.builder(
-              padding: EdgeInsets.symmetric(horizontal: 10.0,  vertical: 10),
-              itemCount: snapshot.data.channels.length,
-              itemBuilder: (BuildContext context, int index) {
-                return AnimationConfiguration.staggeredList(
-                  position: index,
-                  duration: const Duration(milliseconds: 375),
-                  child: SlideAnimation(
-                    child: FadeInAnimation(
-                      child: buildChannelListItem(context, now, snapshot.data.channels[index]),
-                    ),
-                  ),
-                );
-              },
-            ),
-          );
+          return _buildAnimatedChannelList(now, snapshot.data.channels);
         } else if (snapshot.hasError) {
           // try again
         }
 
-        return Center(
-            child: CircularProgressIndicator(
-              backgroundColor: Colors.white,
-              valueColor: new AlwaysStoppedAnimation<Color>(Color(0xfffbb448)),
-            )
-        );
+        return _buildLoadingIndicator(context);
       },
     );
 
@@ -131,35 +110,57 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 }
 
-class EmptyCard extends StatelessWidget {
-  final double width;
-  final double height;
-
-  const EmptyCard({
-    Key key,
-    this.width,
-    this.height,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      width: width,
-      height: height,
-      margin: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 8.0),
-      decoration: const BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.all(Radius.circular(4.0)),
-        boxShadow: <BoxShadow>[
-          BoxShadow(
-            color: Colors.black12,
-            blurRadius: 4.0,
-            offset: Offset(0.0, 4.0),
-          ),
-        ],
+Widget _buildLoadingIndicator(BuildContext context) {
+  return Column(
+    crossAxisAlignment: CrossAxisAlignment.center,
+    mainAxisAlignment: MainAxisAlignment.center,
+    children: <Widget>[
+      CircularProgressIndicator(
+        backgroundColor: Colors.white,
+        valueColor: new AlwaysStoppedAnimation<Color>(Color(0xfffbb448)),
       ),
-    );
-  }
+      SizedBox(
+        height: 30,
+      ),
+      Text("Loading...", style: TextStyle(
+        fontStyle: Theme.of(context).textTheme.display1.fontStyle,
+        fontSize: 12,
+        fontWeight: FontWeight.w300,
+        color: Color(0xfffbb448),
+      ))
+    ],
+  );
+}
+
+Widget _buildAnimatedChannelList(int now, List<dynamic> channels) {
+  return AnimationLimiter(
+    child: ListView.builder(
+      padding: EdgeInsets.symmetric(horizontal: 10.0,  vertical: 10),
+      itemCount: channels.length,
+      itemBuilder: (BuildContext context, int index) {
+        return AnimationConfiguration.staggeredList(
+          position: index,
+          duration: const Duration(milliseconds: 375),
+          child: SlideAnimation(
+            child: FadeInAnimation(
+              child: _buildChannel(context, now, channels[index]),
+            ),
+          ),
+        );
+      },
+    ),
+  );
+}
+
+Widget _buildChannel(BuildContext context, int now, Map<String, dynamic> channel) {
+  return InkWell(
+    onTap: () {
+      Navigator.push(
+          context, MaterialPageRoute(builder: (context) => WatchScreen(channel: channel)
+      ));
+    },
+    child: buildChannelListItem(context, now, channel),
+  );
 }
 
 TitledNavigationBarItem _bottomItem(String title, IconData icon) {
