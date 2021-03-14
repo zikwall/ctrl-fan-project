@@ -50,6 +50,7 @@ class _HomeScreenState extends State<HomeScreen> {
     final double statusBarHeight = MediaQuery.of(context).padding.top;
     final int now = getNowTimestamp().toInt();
 
+    // ignore: non_constant_identifier_names
     final Widget Home = FutureBuilder<Streams>(
       future: futureStreams,
       builder: (BuildContext context, AsyncSnapshot<Streams> snapshot) {

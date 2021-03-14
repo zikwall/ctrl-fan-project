@@ -1,6 +1,8 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 
+import 'package:ctrl_fan_project/constants/domain.dev.dart' show domain, streamEndpoint;
+
 class Streams {
   final List<dynamic> channels;
 
@@ -20,7 +22,7 @@ Future<Streams> fetchStreams() async {
     '_format': 'json',
   };
   final uri = Uri.http(
-      'tv.zikwall.ru', '/api/ctrl/version-one/streams', queryParameters
+      domain, streamEndpoint, queryParameters
   );
 
   try {
