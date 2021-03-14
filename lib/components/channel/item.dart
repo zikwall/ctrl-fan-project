@@ -78,25 +78,23 @@ Widget buildChannelListItem(BuildContext context, int now, Map<String, dynamic> 
     );
   }
 
-  return GestureDetector(
-    child: Container(
-      color: Colors.transparent,
-      padding: EdgeInsets.only(bottom: 5),
-      child: Row(
-        children: <Widget>[
-          buildNetworkImage(item['channel_logo']),
-          Container(
-              padding: EdgeInsets.only(left: 15.0),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisSize: MainAxisSize.max,
-                children: <Widget>[
-                  ...items,
-                ],
-              )
-          )
-        ],
-      ),
+  return Container(
+    color: Colors.transparent,
+    padding: EdgeInsets.only(bottom: 5),
+    child: Row(
+      children: <Widget>[
+        buildNetworkImage(item['channel_logo']),
+        Container(
+            padding: EdgeInsets.only(left: 15.0),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisSize: MainAxisSize.max,
+              children: <Widget>[
+                ...items,
+              ],
+            )
+        )
+      ],
     ),
   );
 }
