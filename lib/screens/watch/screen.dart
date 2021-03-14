@@ -1,4 +1,5 @@
 // native
+
 import 'package:flutter/services.dart';
 import 'package:flutter/material.dart';
 
@@ -8,9 +9,15 @@ import 'package:wakelock/wakelock.dart';
 
 // application
 import 'package:ctrl_fan_project/constants/hls.dev.dart';
+import 'package:ctrl_fan_project/help/string.dart';
 
 class WatchScreen extends StatefulWidget {
-  WatchScreen({Key key}) : super(key: key);
+  final Map<String, dynamic> channel;
+
+  WatchScreen({
+    Key key,
+    @required this.channel
+  }) : super(key: key);
 
   @override
   _WatchScreenState createState() => _WatchScreenState();
@@ -18,19 +25,6 @@ class WatchScreen extends StatefulWidget {
 
 class _WatchScreenState extends State<WatchScreen> {
   GlobalKey _betterPlayerKey = GlobalKey();
-
-  BetterPlayerDataSource dataSource = BetterPlayerDataSource(
-    BetterPlayerDataSourceType.network,
-    exampleHls,
-    liveStream: true,
-    notificationConfiguration: BetterPlayerNotificationConfiguration(
-      showNotification: true,
-      title: "Elephant dream",
-      author: "Some author",
-      imageUrl:
-          "https://upload.wikimedia.org/wikipedia/commons/thumb/3/37/African_Bush_Elephant.jpg/1200px-African_Bush_Elephant.jpg",
-    ),
-  );
 
   var betterPlayerConfiguration = BetterPlayerConfiguration(
     autoPlay: true,
@@ -44,6 +38,19 @@ class _WatchScreenState extends State<WatchScreen> {
   @override
   void initState() {
     super.initState();
+
+    BetterPlayerDataSource dataSource = BetterPlayerDataSource(
+      BetterPlayerDataSourceType.network,
+      base64decode(widget.channel['stream_link'].toString().substring(3)),
+      liveStream: true,
+      notificationConfiguration: BetterPlayerNotificationConfiguration(
+        showNotification: true,
+        title: "Elephant dream",
+        author: "Some author",
+        imageUrl:
+        "https://upload.wikimedia.org/wikipedia/commons/thumb/3/37/African_Bush_Elephant.jpg/1200px-African_Bush_Elephant.jpg",
+      ),
+    );
 
     _betterPlayerController = BetterPlayerController(
         betterPlayerConfiguration,
@@ -68,33 +75,36 @@ class _WatchScreenState extends State<WatchScreen> {
     return AnnotatedRegion<SystemUiOverlayStyle>(
         value: SystemUiOverlayStyle(
           statusBarColor: Colors.transparent,
-          systemNavigationBarIconBrightness: Brightness.dark,
-          statusBarIconBrightness: Brightness.dark,
+          systemNavigationBarIconBrightness: Brightness.light,
+          statusBarIconBrightness: Brightness.light,
         ),
         child: Scaffold(
-            body: Padding(
-              padding: EdgeInsets.only(
-                top: statusBarHeight,
-              ),
-              child: Column(
-                children: <Widget>[
-                  AspectRatio(
-                    aspectRatio: 16 / 9,
-                    child: BetterPlayer(
-                      controller: _betterPlayerController,
-                      key: _betterPlayerKey,
+            body: Container(
+              color: Color(0xff0d1117),
+              child: Padding(
+                padding: EdgeInsets.only(
+                  top: statusBarHeight,
+                ),
+                child: Column(
+                  children: <Widget>[
+                    AspectRatio(
+                      aspectRatio: 16 / 9,
+                      child: BetterPlayer(
+                        controller: _betterPlayerController,
+                        key: _betterPlayerKey,
+                      ),
                     ),
-                  ),
-                  Padding(
-                    padding: EdgeInsets.all(15),
-                    child: InkWell(
-                      onTap: () {
-                        _betterPlayerController.enablePictureInPicture(_betterPlayerKey);
-                      },
-                      child: Text("Enter to PIP"),
-                    ),
-                  )
-                ],
+                    Padding(
+                      padding: EdgeInsets.all(15),
+                      child: InkWell(
+                        onTap: () {
+                          _betterPlayerController.enablePictureInPicture(_betterPlayerKey);
+                        },
+                        child: Text("Enter to PIP", style: TextStyle(color: Color(0xfff7892b))),
+                      ),
+                    )
+                  ],
+                ),
               ),
             )
         )
