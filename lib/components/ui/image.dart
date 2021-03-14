@@ -17,7 +17,7 @@ Widget buildNetworkImage(String image, {double size: 65}) {
     alignment: Alignment.center,
     child: Card(
       shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(15.0),
+        borderRadius: BorderRadius.circular(5.0),
       ),
       elevation: 0,
       color: Colors.grey[100],

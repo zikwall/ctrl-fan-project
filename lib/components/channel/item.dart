@@ -79,8 +79,11 @@ Widget buildChannelListItem(BuildContext context, int now, Map<String, dynamic> 
   }
 
   return Container(
-    color: Colors.transparent,
-    padding: EdgeInsets.only(bottom: 5),
+    decoration: BoxDecoration(
+        color: Color(0xff161b22),
+        borderRadius: BorderRadius.all(Radius.circular(5))
+    ),
+    margin: EdgeInsets.only(bottom: 5),
     child: Row(
       children: <Widget>[
         buildNetworkImage(item['channel_logo']),

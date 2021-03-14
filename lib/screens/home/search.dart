@@ -22,7 +22,7 @@ class _SearchState extends State<SearchWidget> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.symmetric(horizontal: 15, vertical: 5),
+      padding: EdgeInsets.symmetric(horizontal: 10, vertical: 5),
       child: TextField(
           textAlignVertical: TextAlignVertical.center,
           controller: _controller,
