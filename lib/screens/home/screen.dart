@@ -1,12 +1,19 @@
 // native
-import 'package:ctrl_fan_project/help/platform.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/material.dart';
+
+// dependencies
+import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 
 // application
 import 'package:ctrl_fan_project/screens/watch/screen.dart';
 import 'package:ctrl_fan_project/components/bottom/navigation_bar.dart';
 import 'package:ctrl_fan_project/components/bottom/navigation_bar_item.dart';
+import 'package:ctrl_fan_project/help/time.dart';
+import 'package:ctrl_fan_project/components/channel/item.dart';
+import 'package:ctrl_fan_project/fetchers/streams.dart';
+import 'package:ctrl_fan_project/help/platform.dart';
+import 'package:ctrl_fan_project/screens/home/search.dart';
 
 class HomeScreen extends StatefulWidget {
   HomeScreen({Key key}) : super(key: key);
@@ -16,12 +23,14 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  Future<Streams> futureStreams;
   bool installedFromMarket = false;
 
   @override
   void initState() {
     super.initState();
     check();
+    futureStreams = fetchStreams();
   }
 
   void check() async {
@@ -39,6 +48,41 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     final double statusBarHeight = MediaQuery.of(context).padding.top;
+    final int now = getNowTimestamp().toInt();
+
+    final Widget Home = FutureBuilder<Streams>(
+      future: futureStreams,
+      builder: (BuildContext context, AsyncSnapshot<Streams> snapshot) {
+        if (snapshot.hasData) {
+          return AnimationLimiter(
+            child: ListView.builder(
+              padding: EdgeInsets.symmetric(horizontal: 10.0,  vertical: 10),
+              itemCount: snapshot.data.channels.length,
+              itemBuilder: (BuildContext context, int index) {
+                return AnimationConfiguration.staggeredList(
+                  position: index,
+                  duration: const Duration(milliseconds: 375),
+                  child: SlideAnimation(
+                    child: FadeInAnimation(
+                      child: buildChannelListItem(context, now, snapshot.data.channels[index]),
+                    ),
+                  ),
+                );
+              },
+            ),
+          );
+        } else if (snapshot.hasError) {
+          // try again
+        }
+
+        return Center(
+            child: CircularProgressIndicator(
+              backgroundColor: Colors.white,
+              valueColor: new AlwaysStoppedAnimation<Color>(Color(0xfffbb448)),
+            )
+        );
+      },
+    );
 
     return AnnotatedRegion<SystemUiOverlayStyle>(
         value: SystemUiOverlayStyle(
@@ -53,18 +97,16 @@ class _HomeScreenState extends State<HomeScreen> {
                 padding: EdgeInsets.only(
                   top: statusBarHeight,
                 ),
-                child: Center(
-                  child: InkWell(
-                    onTap: () {
-                      Navigator.push(
-                          context, MaterialPageRoute(builder: (context) => WatchScreen()
-                      ));
-                    },
-                    child: Text(
-                        "Watch, ${installedFromMarket ? " original" : "crack"}",
-                      style: TextStyle(color: Color(0xfff7892b)),
+                child: Column(
+                  children: <Widget>[
+                    SearchWidget(
+                        onCancel: () {},
+                        onSearch: (value) {}
                     ),
-                  ),
+                    Expanded(
+                      child: Home,
+                    )
+                  ],
                 ),
               ),
             ),
@@ -85,6 +127,37 @@ class _HomeScreenState extends State<HomeScreen> {
                 ]
             )
         )
+    );
+  }
+}
+
+class EmptyCard extends StatelessWidget {
+  final double width;
+  final double height;
+
+  const EmptyCard({
+    Key key,
+    this.width,
+    this.height,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      width: width,
+      height: height,
+      margin: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 8.0),
+      decoration: const BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.all(Radius.circular(4.0)),
+        boxShadow: <BoxShadow>[
+          BoxShadow(
+            color: Colors.black12,
+            blurRadius: 4.0,
+            offset: Offset(0.0, 4.0),
+          ),
+        ],
+      ),
     );
   }
 }
