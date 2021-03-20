@@ -27,10 +27,16 @@ class _WatchScreenState extends State<WatchScreen> {
   GlobalKey _betterPlayerKey = GlobalKey();
 
   var betterPlayerConfiguration = BetterPlayerConfiguration(
+    fit: BoxFit.contain,
+    autoDetectFullscreenDeviceOrientation: true,
     autoPlay: true,
     looping: true,
     fullScreenByDefault: false,
     allowedScreenSleep: false,
+    controlsConfiguration:
+    BetterPlayerControlsConfiguration(
+      playerTheme: BetterPlayerTheme.cupertino,
+    ),
   );
 
   BetterPlayerController _betterPlayerController;
@@ -43,13 +49,13 @@ class _WatchScreenState extends State<WatchScreen> {
       BetterPlayerDataSourceType.network,
       base64decode(widget.channel['stream_link'].toString().substring(3)),
       liveStream: true,
-      notificationConfiguration: BetterPlayerNotificationConfiguration(
+      /*notificationConfiguration: BetterPlayerNotificationConfiguration(
         showNotification: true,
         title: "Elephant dream",
         author: "Some author",
         imageUrl:
         "https://upload.wikimedia.org/wikipedia/commons/thumb/3/37/African_Bush_Elephant.jpg/1200px-African_Bush_Elephant.jpg",
-      ),
+      ),*/
     );
 
     _betterPlayerController = BetterPlayerController(
