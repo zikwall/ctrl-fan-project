@@ -8,6 +8,7 @@ import 'package:ctrl_fan_project/screens/auth/label.dart';
 import 'package:ctrl_fan_project/screens/auth/login/screen.dart';
 import 'package:ctrl_fan_project/screens/auth/signup/screen.dart';
 import 'package:ctrl_fan_project/screens/auth/forgot/screen.dart';
+import 'package:ctrl_fan_project/components/ui/popup/popup.dart';
 
 class WelcomeScreen extends StatefulWidget {
   WelcomeScreen({Key key}) : super(key: key);
@@ -28,6 +29,28 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
       setState(() {
         isLoaded = true;
       });
+    });
+
+    final popup = BeautifulPopup(
+      context: context,
+      template: TemplateOrangeRocket2,
+    );
+
+    Future.delayed(const Duration(milliseconds: 4000), () {
+      popup.show(
+        title: 'Update',
+        content: 'Dear user, we have a new update. Please update. We will stop supporting the current version in a few days. Thanks.',
+        actions: [
+          popup.button(
+            label: 'Go to market',
+            onPressed: () {
+              print("ok");
+            },
+          ),
+        ],
+        // bool barrierDismissible = false,
+        // Widget close,
+      );
     });
   }
 
