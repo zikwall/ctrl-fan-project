@@ -61,28 +61,32 @@ Widget timeline() {
             vertical: 10,
           ),
           padding: EdgeInsets.all(15),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.start,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: <Widget>[
-              Column(
-                children: [
-                  _timecode('00:00'),
-                  Padding(padding: EdgeInsets.only(bottom: 5)),
-                  _timecode('00:00')
-                ],
-              ),
-              VerticalDivider(
-                color: Colors.grey,
-              ),
-              Text('Timeline Event $index', style: TextStyle(color: Colors.white)),
-            ],
-          ),
+          child: _buildTimelineContent('00:00', '00:00', 'Timeline Event $index'),
         );
       },
       itemCount: data.length,
       contentsAlign: ContentsAlign.basic,
     ),
+  );
+}
+
+Widget _buildTimelineContent(String a, b, c) {
+  return Row(
+    mainAxisAlignment: MainAxisAlignment.start,
+    crossAxisAlignment: CrossAxisAlignment.center,
+    children: <Widget>[
+      Column(
+        children: [
+          _timecode(a),
+          Padding(padding: EdgeInsets.only(bottom: 5)),
+          _timecode(b)
+        ],
+      ),
+      VerticalDivider(
+        color: Colors.grey,
+      ),
+      Text(c, style: TextStyle(color: Colors.white)),
+    ],
   );
 }
 
