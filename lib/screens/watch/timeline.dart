@@ -119,6 +119,10 @@ List<Widget> buildTimelineTabs(BuildContext context) {
           indicator: BoxDecoration(
             //borderRadius: BorderRadius.circular(5),
             color: Color(0xff0d1117),
+            border: Border.all(
+              color: Color(0xfff7892b),
+              width: 2,
+            )
           ),
           isScrollable: true,
           tabs: [1, 2, 3, 4, 5, 6, 7].map((e) =>

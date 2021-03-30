@@ -10,6 +10,7 @@ import 'package:wakelock/wakelock.dart';
 // application
 import 'package:ctrl_fan_project/screens/watch/timeline.dart';
 import 'package:ctrl_fan_project/help/string.dart';
+import 'package:ctrl_fan_project/screens/watch/sheet.dart';
 
 class WatchScreen extends StatefulWidget {
   final Map<String, dynamic> channel;
@@ -74,6 +75,32 @@ class _WatchScreenState extends State<WatchScreen> {
     super.dispose();
   }
 
+  Widget _buildPanel(BuildContext context) {
+    return Row(
+      children: <Widget>[
+        const Spacer(),
+        IconButton(
+            onPressed: () {
+              _betterPlayerController.enablePictureInPicture(_betterPlayerKey);
+            },
+            icon: Icon(
+              Icons.picture_in_picture,
+              color: Color(0xfff7892b),
+            ),
+        ),
+        IconButton(
+          onPressed: () {
+            showSheet(context);
+          },
+          icon: Icon(
+            Icons.comment,
+            color: Color(0xfff7892b),
+          ),
+        ),
+      ],
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     final double statusBarHeight = MediaQuery.of(context).padding.top;
@@ -87,35 +114,27 @@ class _WatchScreenState extends State<WatchScreen> {
         child: DefaultTabController(
           length: 7,
           child: Scaffold(
-              body: Container(
-                color: Color(0xff0d1117),
-                child: Padding(
-                  padding: EdgeInsets.only(
-                    top: statusBarHeight,
-                  ),
-                  child: Column(
-                    children: <Widget>[
-                      AspectRatio(
-                        aspectRatio: 16 / 9,
-                        child: BetterPlayer(
-                          controller: _betterPlayerController,
-                          key: _betterPlayerKey,
-                        ),
-                      ),
-                      Padding(
-                        padding: EdgeInsets.all(15),
-                        child: InkWell(
-                          onTap: () {
-                            _betterPlayerController.enablePictureInPicture(_betterPlayerKey);
-                          },
-                          child: Text("Enter to PIP", style: TextStyle(color: Color(0xfff7892b))),
-                        ),
-                      ),
-                      ...buildTimelineTabs(context),
-                    ],
-                  ),
+            body: Container(
+              color: Color(0xff0d1117),
+              child: Padding(
+                padding: EdgeInsets.only(
+                  top: statusBarHeight,
                 ),
-              )
+                child: Column(
+                  children: <Widget>[
+                    AspectRatio(
+                      aspectRatio: 16 / 9,
+                      child: BetterPlayer(
+                        controller: _betterPlayerController,
+                        key: _betterPlayerKey,
+                      ),
+                    ),
+                    _buildPanel(context),
+                    ...buildTimelineTabs(context),
+                  ],
+                ),
+              ),
+            ),
           ),
         )
     );
