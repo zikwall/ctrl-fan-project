@@ -148,8 +148,8 @@ class PhotoShareBottomSheet extends StatelessWidget {
               height: 318,
               child: ListView(
                 padding: EdgeInsets.all(12).copyWith(
-                    right:
-                    MediaQuery.of(context).size.width / 2 - 100),
+                    right: MediaQuery.of(context).size.width / 2 - 100
+                ),
                 reverse: true,
                 scrollDirection: Axis.horizontal,
                 physics: PageScrollPhysics(),

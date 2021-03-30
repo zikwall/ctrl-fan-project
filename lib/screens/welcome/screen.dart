@@ -136,14 +136,14 @@ Widget _splash(BuildContext context) {
       SizedBox(
         height: 300,
       ),
-      new CircularProgressIndicator(
+      CircularProgressIndicator(
         backgroundColor: Colors.white,
         valueColor: new AlwaysStoppedAnimation<Color>(Color(0xfffbb448)),
       ),
       SizedBox(
         height: 10,
       ),
-      new Text("Loading...", style: TextStyle(
+      Text("Loading...", style: TextStyle(
         fontStyle: Theme.of(context).textTheme.display1.fontStyle,
         fontSize: 12,
         fontWeight: FontWeight.w300,
