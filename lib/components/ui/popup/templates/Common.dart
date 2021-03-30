@@ -181,7 +181,7 @@ abstract class BeautifulPopupTemplate extends StatefulWidget {
       final minHeight = 40.0 - (outline ? 2 : 0);
       return RaisedButton(
         color: Colors.transparent,
-        elevation: elevation,
+        elevation: 0,
         highlightElevation: 0,
         splashColor: Colors.transparent,
         child: Ink(
