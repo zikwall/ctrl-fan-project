@@ -1,5 +1,6 @@
 // native
 import 'dart:async';
+import 'package:ctrl_fan_project/help/platform.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/material.dart';
 
@@ -24,33 +25,39 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
   void initState() {
     super.initState();
 
-    // simulate call API
-    Future.delayed(const Duration(milliseconds: 3000), () {
-      setState(() {
-        isLoaded = true;
-      });
-    });
+    PlatformHelper.isInstalledOneOfPackages([]).then((value) {
+      print("IS INSTALLED ONE OF ==== $value");
 
-    final popup = BeautifulPopup(
-      context: context,
-      template: TemplateOrangeRocket2,
-    );
+      if (value == false) {
+        // simulate call API
+        Future.delayed(const Duration(milliseconds: 3000), () {
+          setState(() {
+            isLoaded = true;
+          });
+        });
 
-    Future.delayed(const Duration(milliseconds: 4000), () {
-      popup.show(
-        title: 'Update',
-        content: 'Dear user, we have a new update. Please update. We will stop supporting the current version in a few days. Thanks.',
-        actions: [
-          popup.button(
-            label: 'Go to market',
-            onPressed: () {
-              print("ok");
-            },
-          ),
-        ],
-        // bool barrierDismissible = false,
-        // Widget close,
-      );
+        final popup = BeautifulPopup(
+          context: context,
+          template: TemplateOrangeRocket2,
+        );
+
+        Future.delayed(const Duration(milliseconds: 4000), () {
+          popup.show(
+            title: 'Update',
+            content: 'Dear user, we have a new update. Please update. We will stop supporting the current version in a few days. Thanks.',
+            actions: [
+              popup.button(
+                label: 'Go to market',
+                onPressed: () {
+                  print("ok");
+                },
+              ),
+            ],
+            // bool barrierDismissible = false,
+            // Widget close,
+          );
+        });
+      }
     });
   }
 

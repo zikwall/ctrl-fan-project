@@ -32,6 +32,26 @@ class PlatformHelper {
     return status;
   }
 
+  static const List<String> packages = [
+    'com.guoshi.httpcanary',
+  ];
+
+  static Future<bool> isInstalledOneOfPackages(List<String> advancedPackages) async {
+    bool status = false;
+
+    // check android
+    try {
+      final merged = new List.from(packages)..addAll(advancedPackages);
+      status = await platform.invokeMethod('isInstalledOneOfPackages', {
+        'packages': merged,
+      });
+    } on PlatformException catch (e) {
+      print(e);
+    }
+
+    return status;
+  }
+
   static Future<DeviceInformation> getInfo() async {
     DeviceInfoPlugin deviceInfoPlugin = DeviceInfoPlugin();
 
