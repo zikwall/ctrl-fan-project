@@ -31,7 +31,6 @@ class MainActivity: FlutterActivity() {
                 var status = false;
 
                 for (pack in packages.orEmpty()) {
-                    Log.d("NATIVE MESSAGE PACKAGE", pack);
                     if (isPackageInstalled(pack, context.packageManager)) {
                         status = true;
                         break;
