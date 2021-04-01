@@ -1,8 +1,10 @@
 package com.illumination_team.ctrl_fan_project
 
 import android.content.Context
+import android.content.pm.PackageManager
 import android.os.Build
 import android.text.TextUtils
+import android.util.Log
 import androidx.annotation.NonNull
 import io.flutter.embedding.android.FlutterActivity
 import io.flutter.embedding.engine.FlutterEngine
@@ -24,6 +26,17 @@ class MainActivity: FlutterActivity() {
             if (call.method == "installedFromMarket") {
                 val status = installedFromMarket(WeakReference(context));
                 result.success(status)
+            } else if (call.method == "isInstalledOneOfPackages") {
+                val packages = call.argument<List<String>>("packages");
+                var status = false;
+
+                for (pack in packages.orEmpty()) {
+                    if (isPackageInstalled(pack, context.packageManager)) {
+                        status = true;
+                        break;
+                    }
+                }
+                result.success(status);
             } else {
                 result.notImplemented()
             }
@@ -60,5 +73,14 @@ class MainActivity: FlutterActivity() {
         }
 
         return result
+    }
+
+    private fun isPackageInstalled(packageName: String, packageManager: PackageManager): Boolean {
+        return try {
+            packageManager.getPackageInfo(packageName, 0)
+            true
+        } catch (e: PackageManager.NameNotFoundException) {
+            false
+        }
     }
 }

@@ -1,5 +1,5 @@
 // native
-import 'dart:async';
+import 'package:flutter/scheduler.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/material.dart';
 
@@ -9,6 +9,7 @@ import 'package:ctrl_fan_project/screens/auth/login/screen.dart';
 import 'package:ctrl_fan_project/screens/auth/signup/screen.dart';
 import 'package:ctrl_fan_project/screens/auth/forgot/screen.dart';
 import 'package:ctrl_fan_project/components/ui/popup/popup.dart';
+import 'package:ctrl_fan_project/help/platform.dart';
 
 class WelcomeScreen extends StatefulWidget {
   WelcomeScreen({Key key}) : super(key: key);
@@ -24,33 +25,55 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
   void initState() {
     super.initState();
 
-    // simulate call API
-    Future.delayed(const Duration(milliseconds: 3000), () {
-      setState(() {
-        isLoaded = true;
+    final List<String> advanced = [
+      "com.example.check",
+    ];
+
+    // for access context use schedule instance, or use Future
+    // ```dart
+    //  Future.delayed(Duration.zero,() {
+    //    popup.show(context, ...);
+    //  }
+    // ```
+    SchedulerBinding.instance.addPostFrameCallback((_) {
+      // call API
+      // return checked apps
+      // return banner message
+      // return another
+      PlatformHelper.isInstalledOneOfPackages(advanced).then((value) {
+        if (value == false) {
+
+          // check banner message exist
+          // create custom banner^
+          //  - message
+          //  - update
+          //  - warning and etc.
+          final popup = BeautifulPopup(
+            context: context,
+            template: TemplateOrangeRocket2,
+          );
+
+          // example update message banner
+          popup.show(
+            title: 'Update',
+            content: 'Dear user, we have a new update. Please update. We will stop supporting the current version in a few days. Thanks.',
+            actions: [
+              popup.button(
+                label: 'Go to market',
+                onPressed: () async {
+                  setState(() {
+                    isLoaded = true;
+                  });
+
+                  await Navigator.of(context).pop();
+                },
+              ),
+            ],
+            barrierDismissible: false,
+            close: Container(),
+          );
+        }
       });
-    });
-
-    final popup = BeautifulPopup(
-      context: context,
-      template: TemplateOrangeRocket2,
-    );
-
-    Future.delayed(const Duration(milliseconds: 4000), () {
-      popup.show(
-        title: 'Update',
-        content: 'Dear user, we have a new update. Please update. We will stop supporting the current version in a few days. Thanks.',
-        actions: [
-          popup.button(
-            label: 'Go to market',
-            onPressed: () {
-              print("ok");
-            },
-          ),
-        ],
-        // bool barrierDismissible = false,
-        // Widget close,
-      );
     });
   }
 
